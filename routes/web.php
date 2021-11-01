@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Quote;
+use App\Models\Movie;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', [
+        'quote' => Quote::inRandomOrder()->first()
+    ]);
+});
+
+Route::get('movies/{movie:slug}', function (Movie $movie) {
+    return view('list', [
+        'quotes' => Quote::where('movie_id', $movie->id)->get(),
+        'movie' => $movie
+    ]);
 });
