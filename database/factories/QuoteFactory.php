@@ -15,10 +15,9 @@ class QuoteFactory extends Factory
      */
     public function definition()
     {
-        $movie = Movie::factory()->create();
         return [
-            'user_id' => $movie->user_id,
-            'movie_id' => $movie->id,
+            'user_id' => User::inRandomOrder()->first()->id,
+            'movie_id' => Movie::inRandomOrder()->first()->id,
             'body' => $this->faker->paragraph(),
         ];
     }
