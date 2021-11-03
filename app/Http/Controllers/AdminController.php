@@ -26,4 +26,11 @@ class AdminController extends Controller
 
         return back()->with('success', "Movie has been added");
     }
+
+    public function destroy(Movie $movie)
+    {
+        $movie->delete();
+
+        return back()->with('success', "Movie has been deleted");
+    }
 }

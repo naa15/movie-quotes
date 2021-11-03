@@ -26,7 +26,7 @@
 
     @yield('content')
 
-
+    <x-success />
 </body>
 
 </html>

@@ -50,3 +50,5 @@ Route::get('logout', [SessionController::class, 'destroy'])->middleware('auth');
 
 Route::get('admin/movies/create', [AdminController::class, 'create'])->middleware('auth');
 Route::post('admin/movies', [AdminController::class, 'store'])->middleware('auth');
+
+Route::delete('admin/movies/{movie}', [AdminController::class, 'destroy'])->middleware('auth');
