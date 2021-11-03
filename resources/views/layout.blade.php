@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
 
 <head>
     <title>Movie Quotes</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
 
     <style>
         body {
@@ -16,8 +17,16 @@
 </head>
 
 
-<body>
+<body class="h-full">
+    @auth
+        <div>
+            <a href="/logout" class="fixed px-6 py-6 right-1.5">Log Out</a>
+        </div>
+    @endauth
+
     @yield('content')
+
+
 </body>
 
 </html>
