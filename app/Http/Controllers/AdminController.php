@@ -24,7 +24,7 @@ class AdminController extends Controller
 
         Movie::create($attributes);
 
-        return back()->with('success', "Movie has been added");
+        return redirect('/admin/movies')->with('success', "Movie has been added");
     }
 
     public function destroy(Movie $movie)
@@ -32,5 +32,22 @@ class AdminController extends Controller
         $movie->delete();
 
         return back()->with('success', "Movie has been deleted");
+    }
+
+    public function edit(Movie $movie)
+    {
+        return view('admin.edit-movie', ['movie' => $movie]);
+    }
+
+    public function update(Movie $movie)
+    {
+        $attributes = request()->validate([
+            'title' => 'required',
+            'slug' => ['required', Rule::unique('movies', 'slug')->ignore($movie)]
+        ]);
+
+        $movie->update($attributes);
+
+        return back()->with('success', 'Movie updated');
     }
 }

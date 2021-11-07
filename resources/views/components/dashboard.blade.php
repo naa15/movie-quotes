@@ -21,7 +21,7 @@
                 </li>
 
                 <li>
-                    <a href="/admin/movies/create" class="{{ request()->is('admin/quotes/create') ? 'text-white' : '' }}">New Quote</a>
+                    <a href="/admin/quotes/create" class="{{ request()->is('admin/quotes/create') ? 'text-white' : '' }}">New Quote</a>
                 </li>
 
                 {{-- edit quote and edit movie pages to go here --}}

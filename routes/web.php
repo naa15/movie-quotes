@@ -6,6 +6,7 @@ use App\Models\Movie;
 use App\Models\User;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\QuoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,7 @@ Route::get('admin/movies', function () {
 
 Route::get('admin/quotes', function () {
     return view('admin/quotes', [
-        'quotes' => Quote::all()
+        'quotes' => Quote::latest()->get()
     ]);
 })->middleware('auth');
 
@@ -50,5 +51,12 @@ Route::get('logout', [SessionController::class, 'destroy'])->middleware('auth');
 
 Route::get('admin/movies/create', [AdminController::class, 'create'])->middleware('auth');
 Route::post('admin/movies', [AdminController::class, 'store'])->middleware('auth');
-
 Route::delete('admin/movies/{movie}', [AdminController::class, 'destroy'])->middleware('auth');
+Route::get('admin/movies/{movie}/edit', [AdminController::class, 'edit'])->middleware('auth');
+Route::patch('admin/movies/{movie}', [AdminController::class, 'update'])->middleware('auth');
+
+Route::get('admin/quotes/create', [QuoteController::class, 'create'])->middleware('auth');
+Route::delete('admin/quotes/{quote}', [QuoteController::class, 'destroy'])->middleware('auth');
+Route::post('admin/quotes', [QuoteController::class, 'store'])->middleware('auth');
+Route::get('admin/quotes/{quote}/edit', [QuoteController::class, 'edit'])->middleware('auth');
+Route::patch('admin/quotes/{quote}', [QuoteController::class, 'update'])->middleware('auth');
