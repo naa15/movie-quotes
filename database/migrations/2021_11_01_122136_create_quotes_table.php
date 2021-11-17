@@ -17,7 +17,7 @@ class CreateQuotesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('movie_id')->constrained()->cascadeOnDelete();
-            $table->text('body');
+            $table->json('body');
             $table->string('thumbnail')->nullable();
             $table->timestamps();
         });

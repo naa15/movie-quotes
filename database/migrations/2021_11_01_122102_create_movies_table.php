@@ -16,7 +16,7 @@ class CreateMoviesTable extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('title');
+            $table->json('title');
             $table->string('slug')->unique();
             $table->timestamps();
         });

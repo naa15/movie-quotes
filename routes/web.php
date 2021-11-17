@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\MovieController;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,22 +20,33 @@ use App\Http\Controllers\QuoteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('home', [
+Route::group(array('prefix' => '{pathlang?}'), function () {
+    Route::get('/', function () {
+        return view('home', [
         'quote' => Quote::inRandomOrder()->first()
     ]);
+    })->middleware('locale');
+
+    Route::get('movies/{movie:slug?}', [MovieController::class, 'index'])->middleware('locale');
 });
 
-Route::get('movies/{movie:slug}', function (Movie $movie) {
-    return view('list', [
-        'quotes' => Quote::where('movie_id', $movie->id)->get(),
-        'movie' => $movie
-    ]);
-});
+// Route::get('/{pathlang}', function () {
+//     return view('home', [
+//         'quote' => Quote::inRandomOrder()->first()
+//     ]);
+// })->middleware('locale');
 
-Route::get('login', [SessionController::class, 'create'])->middleware('guest');
-Route::post('login', [SessionController::class, 'store'])->middleware('guest');
+
+// Route::get('/', function () {
+//     return view('home', [
+//         'quote' => Quote::inRandomOrder()->first()
+//     ]);
+// });
+
+
+
+Route::get('{pathlang}/login', [SessionController::class, 'create'])->middleware('guest');
+Route::post('{pathlang}/login', [SessionController::class, 'store'])->middleware('guest');
 
 Route::get('admin/movies', function () {
     return view('admin/movies', [
@@ -47,7 +60,7 @@ Route::get('admin/quotes', function () {
     ]);
 })->middleware('auth');
 
-Route::get('logout', [SessionController::class, 'destroy'])->middleware('auth');
+Route::get('{pathlang}/logout', [SessionController::class, 'destroy'])->middleware('auth');
 
 Route::get('admin/movies/create', [AdminController::class, 'create'])->middleware('auth');
 Route::post('admin/movies', [AdminController::class, 'store'])->middleware('auth');

@@ -8,7 +8,7 @@
 
         <form action="/admin/movies" method="POST">
             @csrf
-            <x-input name="title"/>
+            <x-input name="title" />
             <x-input name="slug"/>
             <x-button>
                 Submit

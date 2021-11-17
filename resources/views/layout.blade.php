@@ -21,10 +21,10 @@
     <section class="flex justify-between absolute top-1">
         <a href="/" class="px-6 py-4">Homepage</a>
         @auth
-            <a href="/logout" class="px-6 py-4">Log Out</a>
+            <a href="{{ app()->currentLocale() }}/logout" class="px-6 py-4">Log Out</a>
             <a href="/admin/movies" class="px-6 py-4">Admin Panel</a>
         @else
-            <a href="/login" class="px-6 py-4">Log In</a>
+            <a href="{{ app()->currentLocale() }}/login" class="px-6 py-4">Log In</a>
         @endauth
     </section>
 
