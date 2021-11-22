@@ -5,10 +5,8 @@ use App\Models\Quote;
 use App\Models\Movie;
 use App\Models\User;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\MovieController;
-use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,11 +50,11 @@ Route::group(array('prefix' => 'admin'), function () {
 
 
 
-Route::get('admin/movies/create', [AdminController::class, 'create'])->middleware('can:admin');
-Route::post('admin/movies', [AdminController::class, 'store'])->middleware('can:admin');
-Route::delete('admin/movies/{movie}', [AdminController::class, 'destroy'])->middleware('can:admin');
-Route::get('admin/movies/{movie}/edit', [AdminController::class, 'edit'])->middleware('can:admin');
-Route::patch('admin/movies/{movie}', [AdminController::class, 'update'])->middleware('can:admin');
+Route::get('admin/movies/create', [MovieController::class, 'create'])->middleware('can:admin');
+Route::post('admin/movies', [MovieController::class, 'store'])->middleware('can:admin');
+Route::delete('admin/movies/{movie}', [MovieController::class, 'destroy'])->middleware('can:admin');
+Route::get('admin/movies/{movie}/edit', [MovieController::class, 'edit'])->middleware('can:admin');
+Route::patch('admin/movies/{movie}', [MovieController::class, 'update'])->middleware('can:admin');
 
 Route::get('admin/quotes/create', [QuoteController::class, 'create'])->middleware('can:admin');
 Route::delete('admin/quotes/{quote}', [QuoteController::class, 'destroy'])->middleware('can:admin');
