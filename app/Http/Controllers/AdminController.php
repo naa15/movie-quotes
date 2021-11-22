@@ -16,14 +16,21 @@ class AdminController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'title' => 'required',
+            'english_title' => 'required',
+            'georgian_title' => 'required',
             'slug' => ['required', Rule::unique('movies', 'slug')]
         ]);
 
-        $attributes['user_id'] = auth()->id();
+        $movie = new Movie([
+            'user_id' => auth()->id(),
+            'slug' => $attributes['slug']
+        ]);
 
-        Movie::create($attributes);
-
+        $movie
+            ->setTranslation('title', 'en', $attributes['english_title'])
+            ->setTranslation('title', 'ka', $attributes['georgian_title'])
+            ->save();
+        
         return redirect('/admin/movies')->with('success', "Movie has been added");
     }
 
@@ -42,11 +49,17 @@ class AdminController extends Controller
     public function update(Movie $movie)
     {
         $attributes = request()->validate([
-            'title' => 'required',
+            'english_title' => 'required',
+            'georgian_title' => 'required',
             'slug' => ['required', Rule::unique('movies', 'slug')->ignore($movie)]
         ]);
 
-        $movie->update($attributes);
+        $movie->update([
+            'slug' => $attributes['slug'],
+        ]);
+        $movie->setTranslation('title', 'en', $attributes['english_title'])
+            ->setTranslation('title', 'ka', $attributes['georgian_title'])
+            ->save();
 
         return back()->with('success', 'Movie updated');
     }

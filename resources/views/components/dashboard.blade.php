@@ -6,7 +6,6 @@
 
     <div class="flex">
         <aside class="w-48 flex-shrink-0">
-            <h4 class="font-semibold mb-4">Links</h4>
             <ul>
                 <li>
                     <a href="/admin/movies" class="{{ request()->is('admin/movies') ? 'text-white' : '' }}">All Movies</a>
@@ -22,11 +21,6 @@
 
                 <li>
                     <a href="/admin/quotes/create" class="{{ request()->is('admin/quotes/create') ? 'text-white' : '' }}">New Quote</a>
-                </li>
-
-                {{-- edit quote and edit movie pages to go here --}}
-                <li>
-                    <a href="/logout">Log Out</a>
                 </li>
 
             </ul>

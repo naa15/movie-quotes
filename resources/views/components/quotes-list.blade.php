@@ -11,7 +11,16 @@
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
                                                 <a
-                                                    href="/movies/{{ $quote->movie->slug }}">{{ \Illuminate\Support\Str::limit($quote->body, 100, $end = '...') }}</a>
+                                                    href="/en/movie/{{ $quote->movie->slug }}">{{ \Illuminate\Support\Str::limit($quote->getTranslation('body', 'en'), 50, $end = '...') }}</a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                <a
+                                                    href="/ka/movie/{{ $quote->movie->slug }}">{{ \Illuminate\Support\Str::limit($quote->getTranslation('body', 'ka'), 50, $end = '...') }}</a>
                                             </div>
                                         </div>
                                     </td>

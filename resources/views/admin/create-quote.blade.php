@@ -20,7 +20,8 @@
                 <x-error name="movie" />
             </div>
 
-            <x-textarea name="body">{{ old('body') }}</x-textarea>
+            <x-textarea name="english_body">{{ old('english_body') }}</x-textarea>
+            <x-textarea name="georgian_body">{{ old('georgian_body') }}</x-textarea>
             <x-input name="thumbnail" type="file" />
             <x-button>Submit</x-button>
         </form>

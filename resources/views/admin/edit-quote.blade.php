@@ -23,7 +23,9 @@
                 <x-error name="movie" />
             </div>
 
-            <x-textarea name="body">{{ old('body', $quote->body) }}</x-textarea>
+            <x-textarea name="english_body">{{ old('english_body', $quote->getTranslation('body', 'en')) }}</x-textarea>
+            <x-textarea name="georgian_body">{{ old('georgian_body', $quote->getTranslation('body', 'ka')) }}</x-textarea>
+
             <x-input name="thumbnail" type="file" :value="old('thumbnail', $quote->thumbnail)" />
 
             @if ($quote->thumbnail)

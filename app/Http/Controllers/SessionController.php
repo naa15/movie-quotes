@@ -21,9 +21,9 @@ class SessionController extends Controller
             'password' => 'required'
         ]);
     
-
+        
         if (Auth::attempt($attributes)) {
-            return redirect('/admin/movies');
+            return redirect('/');
         }
 
         throw ValidationException::withMessages([

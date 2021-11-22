@@ -27,49 +27,39 @@ Route::group(array('prefix' => '{pathlang?}'), function () {
     ]);
     })->middleware('locale');
 
-    Route::get('movies/{movie:slug?}', [MovieController::class, 'index'])->middleware('locale');
+    Route::get('movie/{movie:slug?}', [MovieController::class, 'index'])->middleware('locale');
+
+    Route::get('login', [SessionController::class, 'create'])->middleware('guest');
+    Route::post('login', [SessionController::class, 'store'])->middleware('guest');
+    Route::get('logout', [SessionController::class, 'destroy'])->middleware('auth');
 });
 
-// Route::get('/{pathlang}', function () {
-//     return view('home', [
-//         'quote' => Quote::inRandomOrder()->first()
-//     ]);
-// })->middleware('locale');
+
+Route::group(array('prefix' => 'admin'), function () {
+    Route::get('/movies', function () {
+        return view('admin/movies', [
+            'movies' => Movie::latest()->get()
+        ]);
+    })->middleware('can:admin');
+
+    Route::get('/quotes', function () {
+        return view('admin/quotes', [
+            'quotes' => Quote::latest()->get()
+        ]);
+    })->middleware('can:admin');
+});
 
 
-// Route::get('/', function () {
-//     return view('home', [
-//         'quote' => Quote::inRandomOrder()->first()
-//     ]);
-// });
 
 
+Route::get('admin/movies/create', [AdminController::class, 'create'])->middleware('can:admin');
+Route::post('admin/movies', [AdminController::class, 'store'])->middleware('can:admin');
+Route::delete('admin/movies/{movie}', [AdminController::class, 'destroy'])->middleware('can:admin');
+Route::get('admin/movies/{movie}/edit', [AdminController::class, 'edit'])->middleware('can:admin');
+Route::patch('admin/movies/{movie}', [AdminController::class, 'update'])->middleware('can:admin');
 
-Route::get('{pathlang}/login', [SessionController::class, 'create'])->middleware('guest');
-Route::post('{pathlang}/login', [SessionController::class, 'store'])->middleware('guest');
-
-Route::get('admin/movies', function () {
-    return view('admin/movies', [
-        'movies' => Movie::latest()->get()
-    ]);
-})->middleware('auth');
-
-Route::get('admin/quotes', function () {
-    return view('admin/quotes', [
-        'quotes' => Quote::latest()->get()
-    ]);
-})->middleware('auth');
-
-Route::get('{pathlang}/logout', [SessionController::class, 'destroy'])->middleware('auth');
-
-Route::get('admin/movies/create', [AdminController::class, 'create'])->middleware('auth');
-Route::post('admin/movies', [AdminController::class, 'store'])->middleware('auth');
-Route::delete('admin/movies/{movie}', [AdminController::class, 'destroy'])->middleware('auth');
-Route::get('admin/movies/{movie}/edit', [AdminController::class, 'edit'])->middleware('auth');
-Route::patch('admin/movies/{movie}', [AdminController::class, 'update'])->middleware('auth');
-
-Route::get('admin/quotes/create', [QuoteController::class, 'create'])->middleware('auth');
-Route::delete('admin/quotes/{quote}', [QuoteController::class, 'destroy'])->middleware('auth');
-Route::post('admin/quotes', [QuoteController::class, 'store'])->middleware('auth');
-Route::get('admin/quotes/{quote}/edit', [QuoteController::class, 'edit'])->middleware('auth');
-Route::patch('admin/quotes/{quote}', [QuoteController::class, 'update'])->middleware('auth');
+Route::get('admin/quotes/create', [QuoteController::class, 'create'])->middleware('can:admin');
+Route::delete('admin/quotes/{quote}', [QuoteController::class, 'destroy'])->middleware('can:admin');
+Route::post('admin/quotes', [QuoteController::class, 'store'])->middleware('can:admin');
+Route::get('admin/quotes/{quote}/edit', [QuoteController::class, 'edit'])->middleware('can:admin');
+Route::patch('admin/quotes/{quote}', [QuoteController::class, 'update'])->middleware('can:admin');

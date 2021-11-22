@@ -20,12 +20,16 @@
 <body class="h-full">
     <section class="flex justify-between absolute top-1">
         <a href="/" class="px-6 py-4">Homepage</a>
-        @auth
-            <a href="{{ app()->currentLocale() }}/logout" class="px-6 py-4">Log Out</a>
+        @admin
+            <a href="/{{ app()->currentLocale() }}/logout" class="px-6 py-4">Log Out</a>
             <a href="/admin/movies" class="px-6 py-4">Admin Panel</a>
         @else
-            <a href="{{ app()->currentLocale() }}/login" class="px-6 py-4">Log In</a>
-        @endauth
+            @auth
+                <a href="/{{ app()->currentLocale() }}/logout" class="px-6 py-4">Log Out</a>
+            @else
+                <a href="{{ app()->currentLocale() }}/login" class="px-6 py-4">Log In</a>
+            @endauth
+        @endadmin
     </section>
 
     @yield('content')

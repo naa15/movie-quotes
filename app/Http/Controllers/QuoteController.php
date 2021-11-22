@@ -20,14 +20,24 @@ class QuoteController extends Controller
     {
         $attributes = request()->validate([
             'movie_id' => ['required', Rule::exists('movies', 'id')],
-            'body' => 'required|max:255',
+            'english_body' => 'required|max:255',
+            'georgian_body' => 'required|max:255',
             'thumbnail' => 'image|required'
         ]);
 
         $attributes['user_id'] = auth()->id();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
-        Quote::create($attributes);
+        $quote = new Quote([
+            'user_id' => auth()->id(),
+            'thumbnail' => $attributes['thumbnail'],
+            'movie_id' => $attributes['movie_id'],
+        ]);
+
+        $quote
+            ->setTranslation('body', 'en', $attributes['english_body'])
+            ->setTranslation('body', 'ka', $attributes['georgian_body'])
+            ->save();
 
         return redirect('/admin/quotes')->with('success', 'New quote added');
     }
@@ -51,15 +61,24 @@ class QuoteController extends Controller
     {
         $attributes = request()->validate([
             'movie_id' => ['required', Rule::exists('movies', 'id')],
-            'body' => 'required|max:255',
-            'thumbnail' => 'required|image'
+            'english_body' => 'required|max:255',
+            'georgian_body' => 'required|max:255',
+            'thumbnail' => 'image'
         ]);
 
         if (isset($attributes['thumbnail'])) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }
 
-        $quote->update($attributes);
+        $quote->update([
+            'movie_id' => $attributes['movie_id'],
+            'thumbnail' => isset($attributes['thumbnail']) ? $attributes['thumbnail'] : $quote->thumbnail
+        ]);
+
+        $quote
+            ->setTranslation('body', 'en', $attributes['english_body'])
+            ->setTranslation('body', 'ka', $attributes['georgian_body'])
+            ->save();
 
         return back()->with('success', 'Quote updated');
     }

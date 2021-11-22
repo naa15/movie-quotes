@@ -29,7 +29,7 @@
                     </h1>
                 </div>
                 <h1 class="text-5xl mt-24 text-white underline">
-                    <a href="{{ app()->currentLocale() }}/movies/{{ $quote->movie->slug }}">{{ ucwords($quote->movie->title) }}</a>
+                    <a href="{{ app()->currentLocale() }}/movie/{{ $quote->movie->slug }}">{{ ucwords($quote->movie->title) }}</a>
                 </h1>
             </div>
         @else
