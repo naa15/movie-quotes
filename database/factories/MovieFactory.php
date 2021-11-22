@@ -17,6 +17,7 @@ class MovieFactory extends Factory
         return [
             'user_id' => User::factory(),
             'slug' => $this->faker->slug(),
+            'title' => $this->faker->title(),
         ];
     }
 }

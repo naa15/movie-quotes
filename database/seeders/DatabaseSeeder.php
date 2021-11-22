@@ -16,30 +16,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User([
-            'name' => 'gela',
-            'email' => 'gela@example.com',
-            'password' => 'gelagela',
-            'username' => 'gelaaa',
-            
+        $user = User::factory()->create();
+        $movie = Movie::factory()->create([
+            'user_id' => $user->id,
         ]);
-        $user->save();
-        // \App\Models\User::factory(10)->create();
-        // User::factory(4)->create();
-        // Movie::factory(4)->create([
-        //     'user_id' => User::inRandomOrder()->first()
-        // ]);
-        // Quote::factory(3)->create([
-        //     'movie_id' => Movie::inRandomOrder()->first(),
-        //     'user_id' =>  User::inRandomOrder()->first()
-        // ]);
-        // Quote::factory(3)->create([
-        //     'movie_id' => Movie::inRandomOrder()->first(),
-        //     'user_id' =>  User::inRandomOrder()->first()
-        // ]);
-        // Quote::factory(4)->create([
-        //     'movie_id' => Movie::inRandomOrder()->first(),
-        //     'user_id' =>  User::inRandomOrder()->first()
-        // ]);
+        $movie->setTranslation('title', 'en', 'The Father of Soldier')
+              ->setTranslation('title', 'ka', 'ჯარისკაცის მამა')
+              ->save();
+        $quote = Quote::factory()->create([
+            'user_id' => $user->id,
+            'movie_id' => $movie->id,
+        ]);
+        $quote->setTranslation('body', 'en', 'What should I tell your mother?!')
+        ->setTranslation('body', 'ka', 'დედაშენს რა ვუთხრა?!')
+        ->save();
+
+        $quote = Quote::factory()->create([
+            'user_id' => $user->id,
+            'movie_id' => $movie->id,
+        ]);
+        $quote->setTranslation('body', 'en', 'What brought you here, you abundant little thing')
+        ->setTranslation('body', 'ka', 'შენ აქ საიდან გაჩნდი, შე ბარაქიანო შენა')
+        ->save();
     }
 }

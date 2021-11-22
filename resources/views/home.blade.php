@@ -21,7 +21,7 @@
         @if ($quote)
             <div class="text-center flex-1 mt-56">
                 <div>
-                    <img src="{{ $quote->thumbnail ? asset('storage/' . $quote->thumbnail) : '' }}"
+                    <img src="{{ $quote->thumbnail ? asset('storage/' . $quote->thumbnail) : '/images/image.png' }}"
                         class="m-auto rounded-xl" width="700" alt="">
                     {{-- <img src="/images/image.png" class="m-auto rounded-xl" alt="The Father of Soldier"> --}}
                     <h1 class="text-5xl mt-16 text-white">
