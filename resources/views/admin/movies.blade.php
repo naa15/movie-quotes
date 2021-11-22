@@ -14,7 +14,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    <a href="/en/movie/{{ $movie->slug }}">{{ ucwords($movie->getTranslation('title', 'en')) }}</a>
+                                                    <a href="/en/movie/{{ $movie->slug }}">{{ \Illuminate\Support\Str::limit(ucwords($movie->getTranslation('title', 'en')), 50, $end = '...') }}</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -22,7 +22,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    <a href="/ka/movie/{{ $movie->slug }}">{{ ucwords($movie->getTranslation('title', 'ka')) }}</a>
+                                                    <a href="/ka/movie/{{ $movie->slug }}">{{ \Illuminate\Support\Str::limit(ucwords($movie->getTranslation('title', 'ka')), 50, $end = '...') }}</a>
                                                 </div>
                                             </div>
                                         </td>

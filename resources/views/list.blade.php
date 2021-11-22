@@ -23,7 +23,7 @@
 
         @foreach ($quotes as $quote)
             <div class="mb-14 inline-grid">
-                <img src="{{ $quote->thumbnail ? asset('storage/' . $quote->thumbnail) : '/images/image.png' }}"
+                <img src="{{ $quote->thumbnail ? asset('storage/' . $quote->thumbnail) : '' }}"
                     class="m-auto rounded-xl" alt="" width="700">
                 <h1 class="text-5xl mt-16 text-white max-w-5xl">
                     "{{ $quote->body }}"

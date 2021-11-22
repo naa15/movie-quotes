@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Quote;
 use App\Models\Movie;
-use App\Models\User;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\MovieController;
@@ -20,10 +19,11 @@ use App\Http\Controllers\MovieController;
 */
 Route::group(array('prefix' => '{pathlang?}'), function () {
     Route::get('/', function () {
-        return view('home', [
-        'quote' => Quote::inRandomOrder()->first()
-    ]);
+        $quote = Quote::inRandomOrder()->first();
+        return redirect('/' . app()->currentLocale(). '/quote/' . $quote->id);
     })->middleware('locale');
+
+    Route::get('quote/{quote}', [QuoteController::class, 'index'])->middleware('locale');
 
     Route::get('movie/{movie:slug?}', [MovieController::class, 'index'])->middleware('locale');
 

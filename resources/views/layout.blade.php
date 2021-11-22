@@ -27,7 +27,7 @@
             @auth
                 <a href="/{{ app()->currentLocale() }}/logout" class="px-6 py-4">Log Out</a>
             @else
-                <a href="{{ app()->currentLocale() }}/login" class="px-6 py-4">Log In</a>
+                <a href="/{{ app()->currentLocale() }}/login" class="px-6 py-4">Log In</a>
             @endauth
         @endadmin
     </section>

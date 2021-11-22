@@ -9,6 +9,13 @@ use Illuminate\Validation\Rule;
 
 class QuoteController extends Controller
 {
+    public function index(string $pathlang, Quote $quote)
+    {
+        return view('home', [
+            'quote' => $quote,
+        ]);
+    }
+
     public function create()
     {
         return view('admin.create-quote', [
