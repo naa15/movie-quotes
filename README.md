@@ -39,13 +39,12 @@ git clone https://github.com/RedberryInternship/nanuka-movie-quotes.git
 composer install
 ```
 
-3\. Now we need to set our env file. You should provide **.env** file the necessary environment variable:
+3\. Now we need to set our env file. You should provide **.env** file the necessary environment variables:
 #
 **SQLite:**
 >DB_CONNECTION=sqlite
 
-and create database.sqlite file in Database directory
-
+>FILESYSTEM_DRIVER=public
 
 #
 ### Migration
@@ -58,21 +57,27 @@ php artisan migrate
 #
 ### Development
 
-You can run Laravel's built-in development server by executing:
+Now you should link storage to public to display photos:
 
 ```sh
-  php artisan serve
-```
-You should seed the database with by executing:
-
-```sh
-  php artisan db:seed
+  php artisan storage:link
 ```
 
-And you should also add new admin user by executing:
+Then you should add a new admin user by executing:
 
 ```sh
   php artisan make:AdminUser
 ```
 and follow the instructions.
 
+```
+You can also seed the database with by executing:
+
+```sh
+  php artisan db:seed
+```
+
+You can run Laravel's built-in development server by executing:
+
+```sh
+  php artisan serve
