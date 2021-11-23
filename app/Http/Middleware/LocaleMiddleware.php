@@ -17,9 +17,8 @@ class LocaleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        App::setLocale(in_array($request->pathlang, ['en', 'ka'])? $request->pathlang : config('app.fallback_locale'));
+        App::setLocale(in_array($request->pathlang, config('app.available_locales'))? $request->pathlang : config('app.fallback_locale'));
         
-        // dd(app()->currentLocale());
         return $next($request);
     }
 }

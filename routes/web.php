@@ -17,47 +17,31 @@ use App\Http\Controllers\MovieController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group(array('prefix' => '{pathlang?}'), function () {
-    Route::get('/', function () {
-        $quote = Quote::inRandomOrder()->first();
-        return redirect('/' . app()->currentLocale(). '/quote/' . $quote->id);
-    })->middleware('locale');
-
+    Route::get('/', [QuoteController::class, 'getRandomQuote'])->middleware('locale');
     Route::get('quote/{quote}', [QuoteController::class, 'index'])->middleware('locale');
-
     Route::get('movie/{movie:slug?}', [MovieController::class, 'index'])->middleware('locale');
-
     Route::get('login', [SessionController::class, 'create'])->middleware('guest');
     Route::post('login', [SessionController::class, 'store'])->middleware('guest');
     Route::get('logout', [SessionController::class, 'destroy'])->middleware('auth');
 });
 
 
-Route::group(array('prefix' => 'admin'), function () {
-    Route::get('/movies', function () {
-        return view('admin/movies', [
-            'movies' => Movie::latest()->get()
-        ]);
-    })->middleware('can:admin');
-
-    Route::get('/quotes', function () {
-        return view('admin/quotes', [
-            'quotes' => Quote::latest()->get()
-        ]);
-    })->middleware('can:admin');
+Route::group(['prefix' => 'admin/movies/', 'middleware' => ['can:admin']], function () {
+    Route::get('/', [MovieController::class, 'indexAdminPanel']);
+    Route::get('create', [MovieController::class, 'create']);
+    Route::post('/', [MovieController::class, 'store']);
+    Route::delete('{movie}', [MovieController::class, 'destroy']);
+    Route::get('{movie}/edit', [MovieController::class, 'edit']);
+    Route::patch('{movie}', [MovieController::class, 'update']);
 });
 
-
-
-
-Route::get('admin/movies/create', [MovieController::class, 'create'])->middleware('can:admin');
-Route::post('admin/movies', [MovieController::class, 'store'])->middleware('can:admin');
-Route::delete('admin/movies/{movie}', [MovieController::class, 'destroy'])->middleware('can:admin');
-Route::get('admin/movies/{movie}/edit', [MovieController::class, 'edit'])->middleware('can:admin');
-Route::patch('admin/movies/{movie}', [MovieController::class, 'update'])->middleware('can:admin');
-
-Route::get('admin/quotes/create', [QuoteController::class, 'create'])->middleware('can:admin');
-Route::delete('admin/quotes/{quote}', [QuoteController::class, 'destroy'])->middleware('can:admin');
-Route::post('admin/quotes', [QuoteController::class, 'store'])->middleware('can:admin');
-Route::get('admin/quotes/{quote}/edit', [QuoteController::class, 'edit'])->middleware('can:admin');
-Route::patch('admin/quotes/{quote}', [QuoteController::class, 'update'])->middleware('can:admin');
+Route::group(['prefix' => 'admin/quotes/', 'middleware' => ['can:admin']], function () {
+    Route::get('/', [QuoteController::class, 'indexAdminPanel']);
+    Route::get('create', [QuoteController::class, 'create']);
+    Route::delete('{quote}', [QuoteController::class, 'destroy']);
+    Route::post('/', [QuoteController::class, 'store']);
+    Route::get('{quote}/edit', [QuoteController::class, 'edit']);
+    Route::patch('{quote}', [QuoteController::class, 'update']);
+});

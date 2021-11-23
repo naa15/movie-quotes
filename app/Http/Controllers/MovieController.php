@@ -11,10 +11,14 @@ class MovieController extends Controller
     public function index()
     {
         $movie = Movie::where('slug', request('movie'))->first();
-        return view('list', [
-                'quotes' => Quote::where('movie_id', $movie->id)->get(),
-                'movie' => $movie,
-            ]);
+        return view('list', ['quotes' => Quote::where('movie_id', $movie->id)->get(), 'movie' => $movie]);
+    }
+
+    public function indexAdminPanel()
+    {
+        return view('admin/movies', [
+            'movies' => Movie::latest()->get()
+        ]);
     }
 
     public function create()

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Quote;
 use App\Models\Movie;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class QuoteController extends Controller
@@ -14,6 +13,19 @@ class QuoteController extends Controller
         return view('home', [
             'quote' => $quote,
         ]);
+    }
+
+    public function indexAdminPanel()
+    {
+        return view('admin/quotes', [
+            'quotes' => Quote::latest()->get()
+        ]);
+    }
+
+    public function getRandomQuote()
+    {
+        $quote = Quote::inRandomOrder()->first();
+        return redirect('/' . app()->currentLocale() . '/quote/' . $quote->id);
     }
 
     public function create()
