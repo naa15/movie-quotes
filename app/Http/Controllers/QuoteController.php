@@ -25,7 +25,13 @@ class QuoteController extends Controller
     public function getRandomQuote()
     {
         $quote = Quote::inRandomOrder()->first();
-        return redirect('/' . app()->currentLocale() . '/quote/' . $quote->id);
+        if ($quote != null) {
+            return redirect('/' . app()->currentLocale() . '/quote/' . $quote->id);
+        } else {
+            return view('home', [
+                'quote' => $quote,
+            ]);
+        }
     }
 
     public function create()
