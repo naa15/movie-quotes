@@ -28,6 +28,8 @@ Movie Quotes is a website where you can browse into website and see random movie
 
 ![databasePic](https://user-images.githubusercontent.com/48657466/143088648-82a6eec5-e11c-4404-9f54-b4fe4bdf654b.png)
 
+[Database Link](https://drawsql.app/redberry-10/diagrams/movie-quotes-sqlite)
+
 ### Getting Started
 1\. First of all you need to clone Movie Quotes repository from github:
 ```sh
@@ -70,7 +72,7 @@ Then you should add a new admin user by executing:
 ```
 and follow the instructions.
 
-```
+
 You can also seed the database with by executing:
 
 ```sh
@@ -81,3 +83,4 @@ You can run Laravel's built-in development server by executing:
 
 ```sh
   php artisan serve
+```
