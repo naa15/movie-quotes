@@ -43,7 +43,7 @@ class MovieController extends Controller
             ->setTranslation('title', 'en', $attributes['english_title'])
             ->setTranslation('title', 'ka', $attributes['georgian_title'])
             ->save();
-        
+
         return redirect('/admin/movies')->with('success', "Movie has been added");
     }
 

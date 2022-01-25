@@ -20,8 +20,8 @@ class SessionController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-    
-        
+
+
         if (Auth::attempt($attributes)) {
             return redirect('/');
         }

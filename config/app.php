@@ -90,7 +90,7 @@ return [
     */
 
     'available_locales' => ['en', 'ka'],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

@@ -17,8 +17,8 @@ class LocaleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        App::setLocale(in_array($request->pathlang, config('app.available_locales'))? $request->pathlang : config('app.fallback_locale'));
-        
+        App::setLocale(in_array($request->pathlang, config('app.available_locales')) ? $request->pathlang : config('app.fallback_locale'));
+
         return $next($request);
     }
 }
