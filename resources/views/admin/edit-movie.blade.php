@@ -6,7 +6,7 @@
 
         <h1 class="font-semibold">Edit Movie</h1>
 
-        <form action="/admin/movies/{{ $movie->id }}" method="POST" class="mb-6">
+        <form action="{{ route('admin.movies.update', $movie->id) }}" method="POST" class="mb-6">
             @csrf
             @method('PATCH')
 

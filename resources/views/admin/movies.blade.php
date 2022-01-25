@@ -14,7 +14,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    <a href="/en/movie/{{ $movie->slug }}">{{ \Illuminate\Support\Str::limit(ucwords($movie->getTranslation('title', 'en')), 50, $end = '...') }}</a>
+                                                    <a href="{{ route('movie.list', ['pathlang' => 'en', 'movie' => $movie->slug]) }}">{{ \Illuminate\Support\Str::limit(ucwords($movie->getTranslation('title', 'en')), 50, $end = '...') }}</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -22,18 +22,18 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    <a href="/ka/movie/{{ $movie->slug }}">{{ \Illuminate\Support\Str::limit(ucwords($movie->getTranslation('title', 'ka')), 50, $end = '...') }}</a>
+                                                    <a href="{{ route('movie.list', ['pathlang' => 'ka', 'movie' => $movie->slug]) }}">{{ \Illuminate\Support\Str::limit(ucwords($movie->getTranslation('title', 'ka')), 50, $end = '...') }}</a>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="/admin/movies/{{ $movie->id }}/edit"
+                                            <a href="{{ route('admin.movies.edit', $movie->id) }}"
                                                 class="text-gray-600 hover:text-gray-900">Edit</a>
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <form method="POST" action="/admin/movies/{{ $movie->id }}">
+                                            <form method="POST" action="{{ route('admin.movies.delete', $movie->id) }}">
                                                 @csrf
                                                 @method('DELETE')
 

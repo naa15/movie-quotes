@@ -19,15 +19,15 @@
 
 <body class="h-full">
     <section class="flex justify-between absolute top-1">
-        <a href="/" class="px-6 py-4">Homepage</a>
+        <a href="{{ route('index', app()->currentLocale()) }}" class="px-6 py-4">Homepage</a>
         @admin
-            <a href="/{{ app()->currentLocale() }}/logout" class="px-6 py-4">Log Out</a>
-            <a href="/admin/movies" class="px-6 py-4">Admin Panel</a>
+            <a href="{{ route('logout', app()->currentLocale()) }}" class="px-6 py-4">Log Out</a>
+            <a href="{{ route('admin.movies') }}" class="px-6 py-4">Admin Panel</a>
         @else
             @auth
-                <a href="/{{ app()->currentLocale() }}/logout" class="px-6 py-4">Log Out</a>
+                <a href="{{ route('logout', app()->currentLocale()) }}" class="px-6 py-4">Log Out</a>
             @else
-                <a href="/{{ app()->currentLocale() }}/login" class="px-6 py-4">Log In</a>
+                <a href="{{ route('login', app()->currentLocale()) }}" class="px-6 py-4">Log In</a>
             @endauth
         @endadmin
     </section>

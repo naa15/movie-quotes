@@ -44,7 +44,7 @@ class MovieController extends Controller
             ->setTranslation('title', 'ka', $attributes['georgian_title'])
             ->save();
 
-        return redirect('/admin/movies')->with('success', "Movie has been added");
+        return redirect(route('admin.movies'))->with('success', "Movie has been added");
     }
 
     public function destroy(Movie $movie)

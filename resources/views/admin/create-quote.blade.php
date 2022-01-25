@@ -6,7 +6,7 @@
 
         <h1 class="font-semibold">Create New Quote:</h1>
 
-        <form action="/admin/quotes" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.quotes') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div>

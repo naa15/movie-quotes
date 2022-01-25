@@ -23,7 +23,7 @@ class SessionController extends Controller
 
 
         if (Auth::attempt($attributes)) {
-            return redirect('/');
+            return redirect(route('index'));
         }
 
         throw ValidationException::withMessages([
@@ -34,6 +34,6 @@ class SessionController extends Controller
     public function destroy()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect(route('index'));
     }
 }

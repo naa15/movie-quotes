@@ -8,19 +8,19 @@
         <aside class="w-48 flex-shrink-0">
             <ul>
                 <li>
-                    <a href="/admin/movies" class="{{ request()->is('admin/movies') ? 'text-white' : '' }}">All Movies</a>
+                    <a href="{{ route('admin.movies') }}" class="{{ request()->is('admin/movies') ? 'text-white' : '' }}">All Movies</a>
                 </li>
 
                 <li>
-                    <a href="/admin/quotes" class="{{ request()->is('admin/quotes') ? 'text-white' : '' }}">All Quotes</a>
+                    <a href="{{ route('admin.quotes') }}" class="{{ request()->is('admin/quotes') ? 'text-white' : '' }}">All Quotes</a>
                 </li>
 
                 <li>
-                    <a href="/admin/movies/create" class="{{ request()->is('admin/movies/create') ? 'text-white' : '' }}">New Movie</a>
+                    <a href="{{ route('admin.movies.create') }}" class="{{ request()->is('admin/movies/create') ? 'text-white' : '' }}">New Movie</a>
                 </li>
 
                 <li>
-                    <a href="/admin/quotes/create" class="{{ request()->is('admin/quotes/create') ? 'text-white' : '' }}">New Quote</a>
+                    <a href="{{ route('admin.quotes.create') }}" class="{{ request()->is('admin/quotes/create') ? 'text-white' : '' }}">New Quote</a>
                 </li>
 
             </ul>

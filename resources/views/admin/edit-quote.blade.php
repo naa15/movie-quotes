@@ -6,7 +6,7 @@
 
         <h1 class="font-semibold">Edit Quote From: "{{ $quote->movie->title }}"</h1>
 
-        <form action="/admin/quotes/{{ $quote->id }}" method="POST" class="mb-6" enctype="multipart/form-data">
+        <form action="{{ route('admin.quotes.update', $quote->id) }}" method="POST" class="mb-6" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 

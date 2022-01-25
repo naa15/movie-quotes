@@ -11,7 +11,7 @@
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
                                                 <a
-                                                    href="/en/movie/{{ $quote->movie->slug }}">{{ \Illuminate\Support\Str::limit($quote->getTranslation('body', 'en'), 50, $end = '...') }}</a>
+                                                    href="{{ route('movie.list', ['pathlang' => 'en', 'movie' => $quote->movie->slug]) }}">{{ \Illuminate\Support\Str::limit($quote->getTranslation('body', 'en'), 50, $end = '...') }}</a>
                                             </div>
                                         </div>
                                     </td>
@@ -20,18 +20,18 @@
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
                                                 <a
-                                                    href="/ka/movie/{{ $quote->movie->slug }}">{{ \Illuminate\Support\Str::limit($quote->getTranslation('body', 'ka'), 50, $end = '...') }}</a>
+                                                    href="{{ route('movie.list', ['pathlang' => 'ka', 'movie' => $quote->movie->slug]) }}">{{ \Illuminate\Support\Str::limit($quote->getTranslation('body', 'ka'), 50, $end = '...') }}</a>
                                             </div>
                                         </div>
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="/admin/quotes/{{ $quote->id }}/edit"
+                                        <a href="{{ route('admin.quotes.edit', $quote->id) }}"
                                             class="text-gray-600 hover:text-gray-900">Edit</a>
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <form method="POST" action="/admin/quotes/{{ $quote->id }}">
+                                        <form method="POST" action="{{ route('admin.quotes.delete', $quote->id) }}">
                                             @csrf
                                             @method('DELETE')
 
@@ -48,6 +48,6 @@
     </div>
 @else
     <h1 class="font-semibold mb-6">There are no quotes for this movie.
-        <a href="/admin/quotes/create" class="underline"> Add quotes </a>
+        <a href="{{ route('admin.quotes.create') }}" class="underline"> Add quotes </a>
     </h1>
 @endif

@@ -17,7 +17,7 @@ class QuoteController extends Controller
 
     public function indexAdminPanel()
     {
-        return view('admin/quotes', [
+        return view('admin.quotes', [
             'quotes' => Quote::latest()->get()
         ]);
     }
@@ -26,7 +26,7 @@ class QuoteController extends Controller
     {
         $quote = Quote::inRandomOrder()->first();
         if ($quote != null) {
-            return redirect('/' . app()->currentLocale() . '/quote/' . $quote->id);
+            return redirect(route('quote', ['pathlang' => app()->currentLocale(), 'quote' => $quote->id]));
         } else {
             return view('home', [
                 'quote' => $quote,
@@ -64,7 +64,7 @@ class QuoteController extends Controller
             ->setTranslation('body', 'ka', $attributes['georgian_body'])
             ->save();
 
-        return redirect('/admin/quotes')->with('success', 'New quote added');
+        return redirect(route('admin.quotes'))->with('success', 'New quote added');
     }
 
     public function destroy(Quote $quote)
