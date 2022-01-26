@@ -6,15 +6,17 @@
         {{-- language buttons --}}
     
         <div class="space-y-2 m-auto flex-shrink-0 mr-16 ml-16">
-            <a href="{{ route('movie.list', ['pathlang' => 'en', 'movie' => $movie->slug]) }}" class="relative flex">
-                <img class="" src="/images/circle2.png" alt="">
-                <h4 class="text-2xl absolute inset-1/4 text-white">en</h4>
-            </a>
-    
-            <a href="{{ route('movie.list', ['pathlang' => 'ka', 'movie' => $movie->slug]) }}" class="relative flex">
-                <img class="" src="/images/circle.png" alt="">
-                <h4 class="text-2xl absolute inset-1/4">ka<h4>
-            </a>
+            @if (app()->currentLocale() == 'ka')
+                <a href="{{ route('movie.list', ['pathlang' => 'en', 'movie' => $movie->slug]) }}" class="relative flex">
+                    <img class="" src="/images/circle2.png" alt="">
+                    <h4 class="text-2xl absolute inset-1/4 text-white">en</h4>
+                </a>                
+            @else             
+                <a href="{{ route('movie.list', ['pathlang' => 'ka', 'movie' => $movie->slug]) }}" class="relative flex">
+                    <img class="" src="/images/circle.png" alt="">
+                    <h4 class="text-2xl absolute inset-1/4">ka<h4>
+                </a>
+            @endif
         </div>
     
         <div class="text-center flex-1">
