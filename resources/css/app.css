@@ -3,3 +3,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+body {
+    background: radial-gradient(circle at 50% 50%, #4E4E4E 0%, #3D3B3B 99.97%, #484848 99.98%, #3D3B3B 99.99%, #3D3B3B 100%);
+}
