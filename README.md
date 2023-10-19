@@ -14,6 +14,8 @@
 
 Movie Quotes is a website where you can browse into website and see random movie quote. Website has two pages, one for movie random quote and one for specific movie quotes. From the landing page(random quote page) there is a link with which you can browse quoutes from the movies from which the random quote is right now showing. Quote has text and image fields, also it is associated with concrete movie. Website has multi-language support: English and Georgian. Admin is able to log into the adminpanel and CRUD quotes and movies.
 
+This project was made for learning purposes.
+
 
 ### Prerequisites
  * PHP@8.0 and up
@@ -33,7 +35,7 @@ Movie Quotes is a website where you can browse into website and see random movie
 ### Getting Started
 1\. First of all you need to clone Movie Quotes repository from github:
 ```sh
-git clone https://github.com/RedberryInternship/nanuka-movie-quotes.git
+git clone https://github.com/naa15/movie-quotes.git
 ```
 
 2\. Next step requires you to run *composer install* in order to install all the dependencies.
